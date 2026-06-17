@@ -32,8 +32,33 @@ button,input,select,textarea{font-family:inherit;}
 /* Content */
 .content{padding:16px;max-width:560px;margin:0 auto;}
 
+/* iPad layout */
+@media (min-width:768px){
+  body{background:#F0E6FA;}
+  .header{position:sticky;top:0;z-index:50;}
+  .tabs{position:sticky;top:62px;z-index:49;}
+  .content{max-width:100%;padding:20px 24px;}
+  #tab-agenda{display:grid!important;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
+  .agenda-left{position:sticky;top:130px;}
+  #tab-clients .clients-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  #tab-services .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .modal-box{max-width:560px;border-radius:20px;margin:auto;}
+  .modal-overlay{align-items:center;}
+  .card{margin-bottom:0;}
+  .tabs{justify-content:center;}
+  .tab{padding:12px 28px;font-size:14px;}
+  .header-title{font-size:22px;}
+}
+@media (min-width:1024px){
+  #tab-agenda{grid-template-columns:380px 1fr;}
+  #tab-clients .clients-grid{grid-template-columns:1fr 1fr 1fr;}
+}
+
 /* Cards */
 .card{background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:10px;}
+.clients-grid .card,.services-grid .card{margin-bottom:0;}
+.clients-grid,.services-grid{display:flex;flex-direction:column;gap:10px;}
+@media(min-width:768px){.clients-grid,.services-grid{display:grid;}}
 .card-left{border-left:4px solid #C026D3;}
 
 /* Buttons */
@@ -150,6 +175,7 @@ textarea.form-input{height:60px;resize:vertical;}
 
   <!-- AGENDA -->
   <div id="tab-agenda" class="content">
+    <div class="agenda-left">
     <div class="card" style="margin-bottom:14px">
       <div class="cal-header">
         <button class="cal-btn" onclick="prevMonth()">‹</button>
@@ -158,11 +184,14 @@ textarea.form-input{height:60px;resize:vertical;}
       </div>
       <div class="cal-grid" id="cal-grid"></div>
     </div>
+    </div><!-- end agenda-left -->
+    <div class="agenda-right">
     <div class="row" style="margin-bottom:10px">
       <div class="sec-title" id="day-title"></div>
       <button class="btn-primary" onclick="openModal('appt')">+ Appuntamento</button>
     </div>
     <div id="day-appts"></div>
+    </div><!-- end agenda-right -->
   </div>
 
   <!-- REMINDER -->
@@ -180,7 +209,7 @@ textarea.form-input{height:60px;resize:vertical;}
       <div class="sec-title" id="clients-title">👥 Clienti</div>
       <button class="btn-primary" onclick="openModal('client')">+ Cliente</button>
     </div>
-    <div id="clients-list"></div>
+    <div class="clients-grid" id="clients-list"></div>
   </div>
 
   <!-- SERVICES -->
@@ -189,7 +218,7 @@ textarea.form-input{height:60px;resize:vertical;}
       <div class="sec-title" id="services-title">✂️ Servizi</div>
       <button class="btn-primary" onclick="openModal('service')">+ Servizio</button>
     </div>
-    <div id="services-list"></div>
+    <div class="services-grid" id="services-list"></div>
   </div>
 </div>
 
